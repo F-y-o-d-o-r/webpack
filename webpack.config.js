@@ -4,9 +4,9 @@ let ExtractTextPlugin = require("extract-text-webpack-plugin");
 let conf = {
   entry: './src/index.js',
   output: {
-    path: path.resolve(__dirname, './dist'),
+    path: path.resolve(__dirname, 'dist'), //куда
     filename: 'main.js',
-    publicPath: 'dist/',
+    publicPath: 'dist/', //сюда пойдут стили, картинки и тд
   },
   devServer: {
     overlay: true,
@@ -17,6 +17,11 @@ let conf = {
         test: /\.js$/,
         loader: 'babel-loader',
         //exclude: '/node_modules/',
+        // options: {
+        //   presets: [
+        //     "env"
+        //   ]
+        // }
       },
       {
         test: /\.css$/,

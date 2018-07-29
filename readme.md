@@ -8,4 +8,4 @@
   extract-text-webpack-plugin@next
 
   url loader - просто переносит без изменений файлы
-  polifil
+  polifill
