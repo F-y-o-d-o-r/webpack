@@ -1,14 +1,16 @@
 let path = require('path');
-let ExtractTextPlugin = require("extract-text-webpack-plugin");
 let HtmlWebpackPlugin = require('html-webpack-plugin');
-//let MiniCssExtractPlugin = require("mini-css-extract-plugin");
+let WebpackMd5Hash = require('webpack-md5-hash');
+let MiniCssExtractPlugin = require("mini-css-extract-plugin");
+let CleanWebpackPlugin = require('clean-webpack-plugin');
 
 let conf = {
   entry: './src/index.js',
   output: {
     path: path.resolve(__dirname, 'dist'), //куда
-    filename: 'main.js',
-    publicPath: 'dist/', //сюда пойдут стили, картинки и тд
+    //filename: '[name].[chunkhash].js',
+    filename: 'js/[name].[hash].js',
+    //publicPath: 'dist/', //сюда пойдут стили, картинки и тд
   },
   devServer: {
     overlay: true,
@@ -17,61 +19,35 @@ let conf = {
   module: {
     rules: [{
         test: /\.js$/,
-        //loader: 'babel-loader',
         exclude: '/node_modules/',
-        // options: {
-        //   presets: [
-        //     "env"
-        //   ]
-        // },
         use: {
           loader: "babel-loader"
         }
       },
-      //просто css
-      // {
-      //   test: /\.css$/,
-      //   use: ExtractTextPlugin.extract({
-      //     fallback: "style-loader",
-      //     use: ["css-loader"]
-      //   })
-      // },
-      //sass
-      // {
-      //   test: /\.sass$/,
-      //   use: ExtractTextPlugin.extract(
-      //     {
-      //       fallback: 'style-loader',
-      //       use: ['css-loader', 'sass-loader']
-      //     })
-      // },
-      //вместе с cssnano, autoprefixer
-      // {
-      //   test: /\.sass$/,
-      //   use:  [  'style-loader', MiniCssExtractPlugin.loader, 'css-loader', 'postcss-loader', 'sass-loader']
-      // },.
       {
-          test: /\.sass$/,
-          use: ExtractTextPlugin.extract(
-            {
-              fallback: 'style-loader',
-              use: ['css-loader', 'postcss-loader', 'sass-loader']
-            })
-        },
+        test: /\.sass$/,
+        use: [
+          'style-loader',
+          MiniCssExtractPlugin.loader,
+          'css-loader',
+          'postcss-loader',
+          'sass-loader'
+        ]
+      },
     ]
   },
-  //devtool: 'eval-sourcemap',
   plugins: [
-    new ExtractTextPlugin("css/styles.css"),
-    // new MiniCssExtractPlugin({
-    //   filename: 'css/styles.css',
-    // }),
+    new CleanWebpackPlugin('dist', {} ),
+    new MiniCssExtractPlugin({
+      filename: 'css/style.[contenthash].css',
+    }),
     new HtmlWebpackPlugin({
       inject: false,
       hash: true,
       template: './src/index.html',
       filename: 'index.html'
     }),
+    new WebpackMd5Hash(),
   ]
 };
 
