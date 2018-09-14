@@ -9,7 +9,9 @@
     "test": "test text form webpack to Fyodor",
     "server": "node server.js"
   },
-  "keywords": [ "webpack" ],
+  "keywords": [
+    "webpack"
+  ],
   "author": "Fyodor",
   "license": "ISC",
   "devDependencies": {
