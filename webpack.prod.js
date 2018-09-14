@@ -13,6 +13,55 @@ module.exports = merge(common, {
     ]
   },
   mode: 'production',
+  //https://gist.github.com/sokra/1522d586b8e5c0f5072d7565c2bee693
+  optimization: {
+    splitChunks: {
+      chunks: 'async',
+      minSize: 30000,
+      minChunks: 1,
+      maxAsyncRequests: 5,
+      maxInitialRequests: 3,
+      name: 'common',
+      cacheGroups: {
+        commons: {
+          name: 'commons',
+          chunks: 'initial',
+          minChunks: 2
+        },
+        default: {
+          minChunks: 2,
+          priority: -20,
+          reuseExistingChunk: true
+        },
+        vendors: {
+          test: /[\\/]node_modules[\\/]/,
+          name: 'vendors',
+          chunks: 'all'
+        }
+      }
+    }
+  },
+  // optimization: {
+  //   splitChunks: {
+  //     chunks: 'all'
+  //   }
+  // },
+  // optimization: {
+  //   minimize: false,
+  //   runtimeChunk: { name: 'common' },
+  //   splitChunks: {
+  //     cacheGroups: {
+  //       default: false,
+  //       commons: {
+  //         test: /\.jsx?$/,
+  //         chunks: 'all',
+  //         minChunks: 2,
+  //         name: 'common',
+  //         enforce: true
+  //       }
+  //     }
+  //   }
+  // },
   // optimization: {
   //   runtimeChunk: 'single',
   //   splitChunks: {

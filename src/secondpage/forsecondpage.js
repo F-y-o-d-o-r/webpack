@@ -1,1 +1,1 @@
-console.log('secondpage!');
+import './second.sass';

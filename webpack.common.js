@@ -24,13 +24,13 @@ module.exports = {
       // hash: true,
       template: './src/index/index.pug',
       filename: 'index.html',
-      chunks: [ 'index' ]
+      chunks: [ 'index', 'common', 'vendors' ]
     }),
     new HtmlWebpackPlugin({
       title: 'Second',
       filename: 'second.html',
       template: './src/secondpage/second.pug',
-      chunks: [ 'secondpage' ]
+      chunks: [ 'secondpage', 'common', 'vendors' ]
     }),
     new webpack.HotModuleReplacementPlugin(),
     new MiniCssExtractPlugin({
@@ -51,29 +51,52 @@ module.exports = {
         options: {
           pretty: true
         }
+      },
+      {
+        test: /\.(jpe?g|png|gif)$/,
+        loader: 'url-loader',
+        options: {
+          // Images larger than 10 KB won’t be inlined
+          limit: 10 * 1024
+        }
+      },
+      {
+        test: /\.svg$/,
+        loader: 'svg-url-loader',
+        options: {
+          // Images larger than 10 KB won’t be inlined
+          limit: 10 * 1024,
+          // Remove quotes around the encoded URL –
+          // they’re rarely useful
+          noquotes: true
+        }
+      },
+      {
+        test: /\.(jpg|png|gif|svg)$/,
+        loader: 'image-webpack-loader',
+        // Specify enforce: 'pre' to apply the loader
+        // before url-loader/svg-url-loader
+        // and not duplicate it in rules with them
+        enforce: 'pre'
+      },
+      {
+        test: /\.(woff|woff2|eot|ttf|otf)$/,
+        include: path.resolve(__dirname, 'src/fonts'),
+        use: {
+          loader: 'file-loader',
+          options: { outputPath: 'fonts/', publicPath: './src/fonts/', name: '[name].[ext]' }
+        }
       }
-
-      // {
-      //   test: /\.pug/,
-      //   loaders: [ 'html-loader', 'pug-html-loader' ]
-      // }
       // {
       //   test: /\.(png|svg|jpg|gif)$/,
       //   include: path.resolve(__dirname, 'src'),
       //   use: [
       //     {
       //       loader: 'file-loader',
-      //       options: { outputPath: 'img/', publicPath: './src/img/', name: '[name].[ext]' }
+      //       //options: { outputPath: 'img/', publicPath: './src/img/', name: '[name].[ext]' }
+      //       options: { name: '[name].[ext]' }
       //     }
       //   ]
-      // },
-      // {
-      //   test: /\.(woff|woff2|eot|ttf|otf)$/,
-      //   include: path.resolve(__dirname, 'src'),
-      //   use: {
-      //     loader: 'file-loader',
-      //     options: { outputPath: 'fonts/', publicPath: './src/fonts/', name: '[name].[ext]' }
-      //   }
       // }
     ]
   }
