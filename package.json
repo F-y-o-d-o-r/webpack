@@ -1,35 +1,30 @@
 {
   "name": "webpack_template",
-  "version": "1.0.0",
-  "description": "fyodor.work@gmail.com",
+  "version": "0.0.1",
+  "description": "webpack_template_for_frontend",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "webpack-dev-server --mode development --open --inline --hot --watch",
-    "build": "webpack --mode production"
+    "build": "webpack --config webpack.prod.js",
+    "start": "webpack-dev-server --open --config webpack.dev.js",
+    "test": "test text form webpack to Fyodor",
+    "server": "node server.js"
   },
-  "author": "fyodor.work@gmail.com",
+  "keywords": [
+    "webpack"
+  ],
+  "author": "Fyodor",
   "license": "ISC",
   "devDependencies": {
-    "autoprefixer": "^9.0.1",
-    "babel-core": "^6.26.3",
-    "babel-loader": "^7.1.5",
-    "babel-preset-env": "^1.7.0",
-    "babel-preset-stage-3": "^6.24.1",
     "clean-webpack-plugin": "^0.1.19",
     "css-loader": "^1.0.0",
+    "express": "^4.16.3",
+    "file-loader": "^2.0.0",
     "html-webpack-plugin": "^3.2.0",
-    "mini-css-extract-plugin": "^0.4.1",
-    "node-sass": "^4.9.2",
-    "postcss-loader": "^2.1.6",
-    "sass-loader": "^7.0.3",
-    "style-loader": "^0.21.0",
-    "webpack": "^4.16.3",
+    "style-loader": "^0.23.0",
+    "webpack": "^4.18.1",
     "webpack-cli": "^3.1.0",
-    "webpack-dev-server": "^3.1.5",
-    "webpack-md5-hash": "0.0.6"
-  },
-  "dependencies": {
-    "jquery": "^3.3.1"
+    "webpack-dev-middleware": "^3.3.0",
+    "webpack-dev-server": "^3.1.8",
+    "webpack-merge": "^4.1.4"
   }
 }

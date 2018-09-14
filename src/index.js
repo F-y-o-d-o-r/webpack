@@ -1,7 +1,13 @@
-import $ from 'jquery';
-import test from './some.js';
-//import './css/style.css';
-import './sass/main.sass';
+import './style.css';
+import img from './img/favicon.png';
 
+function component() {
+  let element = document.createElement('div');
 
-$('h1').html('Jquery is here! Hello!');
+  element.innerHTML = '<img src="img/favicon.png" alt=""/><h1>ssss1</h1>';
+
+  return element;
+}
+
+document.body.appendChild(component());
+console.log('test2');
