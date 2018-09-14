@@ -1,5 +1,5 @@
 //import './style.css';
-import './style.sass';
+//import './style.sass';
 // //import img from './img/favicon.png';
 // function component() {
 //   let element = document.createElement('div');
@@ -10,4 +10,4 @@ import './style.sass';
 // }
 
 // document.body.appendChild(component());
-// console.log('test2');
+console.log('test2');

@@ -1,6 +1,6 @@
+const path = require('path');
 const merge = require('webpack-merge');
 const common = require('./webpack.common.js');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = merge(common, {
   // plugins: [
@@ -22,9 +22,10 @@ module.exports = merge(common, {
   //devtool: 'source-map',
   devtool: 'inline-source-map',
   devServer: {
+    //stats: 'errors-only',
     //contentBase: './src',
     //overlay: true,
-    contentBase: 'src',
+    contentBase: path.join(__dirname, 'src'),
     watchContentBase: true,
     hot: true,
     port: 55555

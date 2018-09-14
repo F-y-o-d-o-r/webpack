@@ -6,9 +6,11 @@ const devMode = process.env.NODE_ENV !== 'production';
 
 module.exports = {
   entry: {
-    polyfills: './src/polyfills.js',
-    app: './src/index.js'
-    //other: './src/other.js'
+    //polyfills: './src/polyfills.js',
+    //app: './src/index.js',
+    //second: './src/second.js'
+    index: './src/index/forindex.js',
+    secondpage: './src/secondpage/forsecondpage.js'
     //'vendor': [
     //  'jquery',
     //  'popper.js',
@@ -17,39 +19,44 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      // title: 'Production',
+      title: 'Index',
       // inject: false,
       // hash: true,
-      template: './src/index.pug'
-      // filename: 'index.html'
+      template: './src/index/index.pug',
+      filename: 'index.html',
+      chunks: [ 'index' ]
     }),
     new HtmlWebpackPlugin({
-      // title: 'Production',
-      // inject: false,
-      // hash: true,
+      title: 'Second',
       filename: 'second.html',
-      template: './src/second.pug'
-      // filename: 'index.html'
+      template: './src/secondpage/second.pug',
+      chunks: [ 'secondpage' ]
     }),
     new webpack.HotModuleReplacementPlugin(),
     new MiniCssExtractPlugin({
-      // Options similar to the same options in webpackOptions.output
-      // both options are optional
       filename: devMode ? 'css/[name][hash].css' : '[name].css',
       chunkFilename: devMode ? 'css/[id][hash].css' : '[id].css'
     })
   ],
   output: {
-    filename: 'js/[name].[hash].js',
-    //filename: '[name].bundle.js',
+    //filename: 'js/[name].[hash].js',
+    filename: 'js/[name].js',
     path: path.resolve(__dirname, 'dist')
   },
   module: {
     rules: [
       {
-        test: /\.pug/,
-        loaders: [ 'html-loader', 'pug-html-loader' ]
+        test: /\.pug$/,
+        loader: 'pug-loader',
+        options: {
+          pretty: true
+        }
       }
+
+      // {
+      //   test: /\.pug/,
+      //   loaders: [ 'html-loader', 'pug-html-loader' ]
+      // }
       // {
       //   test: /\.(png|svg|jpg|gif)$/,
       //   include: path.resolve(__dirname, 'src'),
