@@ -6,6 +6,18 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Document</title>
   <link rel="stylesheet" href="dist/css/styles.css">
+  <script>
+          var modernBrowser = (
+            'fetch' in window &&
+            'assign' in Object
+          );
+              if ( !modernBrowser ) {
+            var scriptElement = document.createElement('script');
+                scriptElement.async = false;
+            scriptElement.src = '/polyfills.bundle.js';
+            document.head.appendChild(scriptElement);
+          }
+        </script>
 </head>
 <body>
   <h3>h3</h3>
