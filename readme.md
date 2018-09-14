@@ -1,2 +1,3 @@
 todo
-remove not usable plugins
+-eslint
+-remove not usable plugins
