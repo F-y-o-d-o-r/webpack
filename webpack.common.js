@@ -23,6 +23,14 @@ module.exports = {
       template: './src/index.pug'
       // filename: 'index.html'
     }),
+    new HtmlWebpackPlugin({
+      // title: 'Production',
+      // inject: false,
+      // hash: true,
+      filename: 'second.html',
+      template: './src/second.pug'
+      // filename: 'index.html'
+    }),
     new webpack.HotModuleReplacementPlugin(),
     new MiniCssExtractPlugin({
       // Options similar to the same options in webpackOptions.output
