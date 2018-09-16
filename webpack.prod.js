@@ -2,13 +2,37 @@ const merge = require('webpack-merge');
 const common = require('./webpack.common.js');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = merge(common, {
   module: {
     rules: [
       {
         test: /\.(sa|sc|c)ss$/,
-        use: [ 'style-loader', MiniCssExtractPlugin.loader, 'css-loader', 'postcss-loader', 'sass-loader' ]
+        exclude: /firstscreen\.sass/,
+        use: [
+          'style-loader',
+          MiniCssExtractPlugin.loader,
+          {
+            loader: 'css-loader',
+            options: {
+              sourceMap: false,
+              minimize: true
+              //url: false //установкой url=false говорим, что все ссылки на файлы в SCSS коде не трогаем, пути не меняем, никакие файлы не копируем и не встраиваем
+            }
+          },
+          'postcss-loader',
+          {
+            loader: 'sass-loader',
+            options: {
+              sourceMap: false
+            }
+          }
+        ]
+      },
+      {
+        test: /firstscreen\.sass/,
+        use: [ 'style-loader', 'css-loader', 'postcss-loader', 'sass-loader' ]
       }
     ]
   },
@@ -74,5 +98,13 @@ module.exports = merge(common, {
   //     }
   //   }
   // },
-  plugins: [ new CleanWebpackPlugin([ 'dist' ]) ]
+  plugins: [
+    new CleanWebpackPlugin([ 'dist' ]),
+    new CopyWebpackPlugin([
+      {
+        from: './src/uploads',
+        to: './uploads'
+      }
+    ])
+  ]
 });

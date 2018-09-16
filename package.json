@@ -9,15 +9,15 @@
     "test": "test text form webpack to Fyodor",
     "server": "node server.js"
   },
-  "keywords": [
-    "webpack"
-  ],
+  "keywords": [ "webpack" ],
   "author": "Fyodor",
   "license": "ISC",
   "devDependencies": {
     "add": "^2.0.6",
     "autoprefixer": "^9.1.5",
+    "babel-loader": "^8.0.2",
     "clean-webpack-plugin": "^0.1.19",
+    "copy-webpack-plugin": "^4.5.2",
     "css-loader": "^1.0.0",
     "cssnano": "^4.1.0",
     "file-loader": "^2.0.0",

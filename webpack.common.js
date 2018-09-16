@@ -9,8 +9,8 @@ module.exports = {
     //polyfills: './src/polyfills.js',
     //app: './src/index.js',
     //second: './src/second.js'
-    index: './src/index/forindex.js',
-    secondpage: './src/secondpage/forsecondpage.js'
+    index: './src/pages/index/forindex.js',
+    secondpage: './src/pages/secondpage/forsecondpage.js'
     //'vendor': [
     //  'jquery',
     //  'popper.js',
@@ -22,25 +22,29 @@ module.exports = {
       title: 'Index',
       // inject: false,
       // hash: true,
-      template: './src/index/index.pug',
+      minify: {
+        removeComments: true,
+        collapseWhitespace: true
+      },
+      template: './src/pages/index/index.pug',
       filename: 'index.html',
       chunks: [ 'index', 'common', 'vendors' ]
     }),
     new HtmlWebpackPlugin({
       title: 'Second',
       filename: 'second.html',
-      template: './src/secondpage/second.pug',
+      template: './src/pages/secondpage/second.pug',
       chunks: [ 'secondpage', 'common', 'vendors' ]
     }),
     new webpack.HotModuleReplacementPlugin(),
     new MiniCssExtractPlugin({
-      filename: devMode ? 'css/[name][hash].css' : '[name].css',
-      chunkFilename: devMode ? 'css/[id][hash].css' : '[id].css'
+      filename: devMode ? 'css/[name].[hash].css' : '[name].css',
+      chunkFilename: devMode ? 'css/[id].[hash].css' : '[id].css'
     })
   ],
   output: {
     //filename: 'js/[name].[hash].js',
-    filename: 'js/[name].js',
+    filename: 'js/[name].[hash].js',
     path: path.resolve(__dirname, 'dist')
   },
   module: {
@@ -50,6 +54,14 @@ module.exports = {
         loader: 'pug-loader',
         options: {
           pretty: true
+        }
+      },
+      {
+        test: /\.js$/,
+        include: path.resolve(__dirname, 'src/js'),
+        exclude: /node_modules/,
+        use: {
+          loader: 'babel-loader'
         }
       },
       {
