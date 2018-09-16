@@ -24,7 +24,10 @@ module.exports = merge(common, {
   devServer: {
     //stats: 'errors-only',
     //contentBase: './src',
-    //overlay: true,
+    overlay: {
+      warnings: false,
+      errors: true
+    },
     contentBase: path.join(__dirname, 'src'),
     watchContentBase: true,
     hot: true,
