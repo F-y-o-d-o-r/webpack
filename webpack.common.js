@@ -3,6 +3,11 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const webpack = require('webpack');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const devMode = process.env.NODE_ENV !== 'production';
+//https://bitwiser.in/2018/02/22/setup-javascript-webpack-project.html
+//const isDev = env === 'development';
+//const env = process.env.NODE_ENV || 'development';
+//"build": "NODE_ENV=production webpack"
+//new ExtractTextPlugin({filename: 'index.css',disable: isDev});
 
 module.exports = {
   entry: {
@@ -56,13 +61,30 @@ module.exports = {
           pretty: true
         }
       },
+      // {
+      //   enforce: 'pre',
+      //   test: /\.js$/,
+      //   exclude: /node_modules/,
+      //   use: 'eslint-loader'
+      // },
+      // {
+      //   test: /\.js$/,
+      //   exclude: /node_modules/,
+      //   use: 'babel-loader'
+      // },
       {
         test: /\.js$/,
-        include: path.resolve(__dirname, 'src/js'),
+        include: path.resolve(__dirname, 'src'),
         exclude: /node_modules/,
-        use: {
-          loader: 'babel-loader'
-        }
+        use: [
+          'babel-loader',
+          {
+            loader: 'eslint-loader',
+            options: {
+              emitWarning: true
+            }
+          }
+        ]
       },
       {
         test: /\.(jpe?g|png|gif)$/,
