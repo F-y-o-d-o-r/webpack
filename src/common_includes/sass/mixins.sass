@@ -1,2 +1,126 @@
-body
-  color: red
+/*fonts*/
+=ff($size: 1, $lh: 4.2)
+  font-family: 'Source Sans Pro', sans-serif
+  font-weight: 300
+  font-size: $size + rem
+  line-height: $lh + rem
+  color: rgba(44, 44, 44, 1.000)
+=ffb($size: 1, $lh: 1)
+  font-family: 'Source Sans Pro', sans-serif
+  font-weight: 600
+  font-size: $size + rem
+  line-height: $lh + rem
+  color: rgba(44, 44, 44, 1.000)
+=ffh($size: 1, $lh: 1)
+  font-family: 'Abril Fatface', cursive
+  font-weight: 600
+  font-size: $size + rem
+  line-height: $lh + rem
+  color: rgba(44, 44, 44, 1.000)
+=t
+  transition: all ease .4s
+
+// width
+=r($width)
+  @media only screen and (max-width: $width+ "px")
+    @content
+
+=rmin($width)
+  @media only screen and (min-width: $width+ "px")
+    @content
+
+// height
+=rh($height)
+  @media only screen and (max-height: $height + "px")
+    @content
+
+=rhmin($height)
+  @media only screen and (min-height: $height + "px")
+    @content
+
+=cover
+  background-repeat: no-repeat
+  background-size: cover
+  background-position: 50% 50%
+
+=bg-size($width: 100%, $height: 100%)
+  background-size: $width $height
+
+// retina, also available as +hdpi
+=retina
+  @media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min-device-pixel-ratio: 2)
+    @content
+
+// vertical-align at center
+=vcenter
+  position: absolute
+  top: 50%
+  left: 50%
+  transform: translate(-50%,-50%)
+
+//simple gradient
+=g($color1, $color2)
+  background-image: linear-gradient($color1, $color2)
+
+=gh($color1, $color2)
+  background-image: linear-gradient(left, $color1, $color2)
+
+=clr
+  &:after
+    content: " "
+    display: table
+    clear: both
+
+=placeholder-color($color)
+  &::placeholder
+    color: $color
+
+=placeholder
+  &::placeholder
+    @content
+
+=rotate($var)
+  transform: rotate($var+deg)
+
+=blur($var)
+  filter: blur($var)
+
+=better-blur($radius)
+  filter: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='a' x='0' y='0' width='1' height='1' color-interpolation-filters='sRGB'%3E%3CfeGaussianBlur stdDeviation='#{$radius}' result='b'/%3E%3CfeMorphology operator='dilate' radius='#{$radius}'/%3E %3CfeMerge%3E%3CfeMergeNode/%3E%3CfeMergeNode in='b'/%3E%3C/feMerge%3E%3C/filter%3E %3C/svg%3E#a")
+  
+=scale($var)
+  transform: scale($var)
+
+=center($axis)
+  @if $axis == both
+    +vcenter
+  @else if $axis == h
+    position: absolute
+    left: 50%
+    transform: translateX(-50%)
+  @else if $axis == v
+    position: absolute
+    top: 50%
+    transform: translateY(-50%)
+
+=hv($color: #2F247F)
+  &:hover 
+    color: lighten($color, 10%) !important
+    +t
+
+=main-color
+  color: #2F247F
+=main-bg-color
+  background-color: #2F247F
+
+=second-color
+  color: #DCD22C
+=second-bg-color
+  background-color: #DCD22C
+
+//rgba(47, 36, 127, 1);
+//#DCD22C   rgba(220, 210, 44, 1)
+//#8F880E
+//#FFF54C
+  //#30008F
+  //#672CDC

@@ -3,6 +3,7 @@
   "rules": {
     "no-unused-vars": 0,
     ignoreComments: true,
-    "camelcase": "warn"
+    "camelcase": "warn",
+    "linebreak-style": 0
   }
 }

@@ -29,7 +29,15 @@ module.exports = {
       // hash: true,
       minify: {
         removeComments: true,
-        collapseWhitespace: true
+        collapseWhitespace: true,
+        removeRedundantAttributes: true,
+        useShortDoctype: true,
+        removeEmptyAttributes: true,
+        removeStyleLinkTypeAttributes: true,
+        keepClosingSlash: true,
+        minifyJS: true,
+        minifyCSS: true,
+        minifyURLs: true
       },
       template: './src/pages/index/index.pug',
       filename: 'index.html',
@@ -37,6 +45,18 @@ module.exports = {
     }),
     new HtmlWebpackPlugin({
       title: 'Second',
+      minify: {
+        removeComments: true,
+        collapseWhitespace: true,
+        removeRedundantAttributes: true,
+        useShortDoctype: true,
+        removeEmptyAttributes: true,
+        removeStyleLinkTypeAttributes: true,
+        keepClosingSlash: true,
+        minifyJS: true,
+        minifyCSS: true,
+        minifyURLs: true
+      },
       filename: 'second.html',
       template: './src/pages/secondpage/second.pug',
       chunks: [ 'secondpage', 'common', 'vendors' ]

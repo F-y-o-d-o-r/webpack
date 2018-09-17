@@ -1,7 +1,30 @@
-doctype html
-head
-  title Getting Started
-  body
-    h1 pug new
+extends ../../common_includes/pug/layout
+
+include ../../common_includes/pug/mixins
+
+mixin name()
+  p
+
+block vars
+  - var title = "Title - index" //120 символов
+  - var bodyClass = "wrap_this_page"
+
+block content
+  main
+    h1 fdfgfg1
+    +name()
+
+    //include header/header
+
+
+
+
+
+
+
+
+
+
+
     img(src=require("./../../img/favicon.png"))
 
