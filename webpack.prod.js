@@ -32,7 +32,15 @@ module.exports = merge(common, {
       },
       {
         test: /firstscreen\.sass/,
-        use: [ 'style-loader', 'css-loader', 'postcss-loader', 'sass-loader' ]
+        use: [
+          {
+            loader: 'style-loader',
+            options: {}
+          },
+          'css-loader',
+          'postcss-loader',
+          'sass-loader'
+        ]
       }
     ]
   },
